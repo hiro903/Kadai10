@@ -4,10 +4,10 @@ import java.time.LocalDate;
 
 public class Roster {
 
-    private Integer id;
-    private String name;
-    private LocalDate dateOfBirth;
-    private String nearestStation;
+    final Integer id;
+    final String name;
+    final LocalDate dateOfBirth;
+    final String nearestStation;
 
     public Roster(Integer id, String name, LocalDate dateOfBirth, String nearestStation) {
         this.id = id;
@@ -18,5 +18,21 @@ public class Roster {
 
     public static Roster createStaff(String name, LocalDate dateOfBirth, String nearestStation) {
         return new Roster(null, name, dateOfBirth, nearestStation);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public String getNearestStation() {
+        return nearestStation;
     }
 }
