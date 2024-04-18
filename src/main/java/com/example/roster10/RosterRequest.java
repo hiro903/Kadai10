@@ -4,10 +4,10 @@ import java.time.LocalDate;
 
 public class RosterRequest {
 
-    private String name;
+    private final String name;
 
-    private LocalDate dateOfBirth;
-    private String nearestStation;
+    private final LocalDate dateOfBirth;
+    private final String nearestStation;
 
     public RosterRequest(String name, LocalDate dateOfBirth, String nearestStation) {
         this.name = name;
