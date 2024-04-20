@@ -9,8 +9,9 @@ public interface RosterMapper {
     @Insert({"<script>",
             "INSERT INTO staff (name, date_of_birth, nearest_station)",
             "VALUES (#{name}, ",
+            "<if test='name != null'>#{name},</if>",
             "<if test='dateOfBirth != null'>#{dateOfBirth},</if>",
-            "#{nearest_station})",
+            "<if test='nearestStation != null'>#{nearestStation}</if>",
             "</script>"})
     @Options(
             useGeneratedKeys = true,
