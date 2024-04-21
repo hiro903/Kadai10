@@ -2,14 +2,14 @@ package com.example.roster10;
 
 import java.time.LocalDate;
 
-public class RosterRequest {
+public class StaffRequest {
 
     private final String name;
 
     private final LocalDate dateOfBirth;
     private final String nearestStation;
 
-    public RosterRequest(String name, LocalDate dateOfBirth, String nearestStation) {
+    public StaffRequest(String name, LocalDate dateOfBirth, String nearestStation) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.nearestStation = nearestStation;

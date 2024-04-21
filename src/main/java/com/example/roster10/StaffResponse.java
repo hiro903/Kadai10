@@ -1,9 +1,9 @@
 package com.example.roster10;
 
-public class RosterResponse {
+public class StaffResponse {
     private String message;
 
-    public RosterResponse(String message) {
+    public StaffResponse(String message) {
         this.message = message;
     }
 
