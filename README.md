@@ -79,7 +79,7 @@
       ```java:
          @Insert({"<script>",
               "INSERT INTO staff (name, date_of_birth, nearest_station)",
-              "VALUES (#{name}, ",
+              "VALUES ( ",
               "<if test='name != null'>#{name},</if>",
               "<if test='dateOfBirth != null'>#{dateOfBirth},</if>",
               "<if test='nearestStation != null'>#{nearestStation}</if>",

@@ -21,7 +21,7 @@ public class StaffController {
         this.staffService = staffService;
     }
 
-    @PostMapping("/roster")
+    @PostMapping("/staff")
     public ResponseEntity<Object> insert(@RequestBody StaffRequest staffRequest, UriComponentsBuilder uriBuilder) {
         Staff staff = staffService.insert(staffRequest.getName(), staffRequest.getDateOfBirth(), staffRequest.getNearestStation());
         URI location = uriBuilder.path("/staff/{id}").buildAndExpand(staff.getId()).toUri();
