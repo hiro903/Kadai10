@@ -28,5 +28,9 @@ public class StaffController {
         StaffResponse body = new StaffResponse("staff created");
         return ResponseEntity.created(location).body(body);
     }
+    @GetMapping("/staff/{id}")
+    public ResponseEntity<Staff> getRoster(@PathVariable("id") int id) {
+        return ResponseEntity.ok(staffService.findStaff(id));
+    }
 
 }

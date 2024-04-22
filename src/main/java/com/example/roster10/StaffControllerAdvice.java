@@ -13,7 +13,7 @@ import java.util.Map;
 @ControllerAdvice
 public class StaffControllerAdvice {
     @ExceptionHandler(value = StaffNotFoundException.class)
-    public ResponseEntity handleRosterNotFoundException(
+    public ResponseEntity handleStaffNotFoundException(
             StaffNotFoundException e, HttpServletRequest request) {
         Map<String, String> body = new HashMap<>();
         body.put("timestamp", ZonedDateTime.now().toString());
