@@ -23,5 +23,7 @@ public interface StaffMapper {
             keyProperty = "id"
     )
     void insert(Staff staff);
+    @Select("SELECT * FROM staff WHERE id =#{id}")
+    Optional<Staff> findById(int id);
 
 }

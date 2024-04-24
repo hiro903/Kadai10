@@ -18,4 +18,8 @@ public class StaffService {
         staffMapper.insert(staff);
         return staff;
     }
+    public Staff findStaff(int id) {
+        Optional<Staff> roster = this.staffMapper.findById(id);
+        return roster.orElseThrow(() -> new StaffNotFoundException("Staff with id " + id + " not found"));
+    }
 }
