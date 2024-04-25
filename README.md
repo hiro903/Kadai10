@@ -1,5 +1,5 @@
 
-## 10回目課題-1: CREATE処理-READ処理
+## 10回目課題-1: CREATE処理-READ処理-UPDATE処理
 
 ### 目次
 1. プロジェクト名
@@ -44,13 +44,14 @@
    <br>![image](https://github.com/hiro903/Kadai10/assets/145466271/c7699188-6418-4439-a386-c21a2fa97bad)
    <br>    ![image-1](https://github.com/hiro903/Kadai10/assets/145466271/0db63fcf-47c4-472e-858e-46cc56f66221)
    <br> ![image](https://github.com/hiro903/Kadai10/assets/145466271/b496c111-3f39-4972-b03b-593db26cf244)
+　　<br>![image](https://github.com/hiro903/Kadai10/assets/145466271/9f9b2c2d-24fb-4ecc-98d6-3910c7a0f4ae)
+   <br> ![image](https://github.com/hiro903/Kadai10/assets/145466271/98495fff-5422-4505-83d9-a6c9fba665dd)
 ### 6. エラー
 1. リクエストを投げたら、500サーバーエラーが返ってきてしまう。コードエラーは直していたので、問題の箇所を見つけるのに時間がかかった。
    >カラムでもたせていた「date_of_birth」がRosterクラスではgetDateOfBirth()メソッドが提供されていたが、MapperクラスのINSERT文ではスネークケースで記載されていたので、リクエストを投げた時にマッピングできなかった。エンティティのフィールド名、リクエストを投げる時は、キャメルケースにすること。（※「nearest_station」はなぜかエラーにならなかった）
 
 2. Gradleがダウンロードされていない、またはGradleが対応していないというエラーで、Spring Bootが起動できない。コードにエラーは出ていなかった。
    >Gradleファイルなどを確認して依存関係にあるか調べたが、きちんと記載されていた。ビルドの再読み込みをしたら改善した。
-
 ### 7. 学んだこと
 1. **SQLのテーブル定義で各要素にnull制約をかけている場合でも、Javaのコードで対応することが推奨される**
    Javaのコードでnull値をチェックしてバリデーションを行うことは、セキュリティやシステムの信頼性を高めるために重要。そのため、SQLのテーブル定義で制約を設けていても、Javaのコードでのバリデーションを行うことが推奨される。
@@ -105,3 +106,20 @@
 MyBatisの動的SQLを記述するための終了タグ。
 <br> ※上記はnullでない値を持つことが保証されている場合にのみ適切。
 もしデータベースのスキーマがnullを許容していないのであれば、その点を考慮する必要がある。
+5. **更新処理において、テーブル定義が**<br>
+- name VARCHAR(255) NOT NULL,<br>
+          date_of_birth DATE NOT NULL,<br>
+        nearest_station VARCHAR(255) NOT NULL,<br>の場合
+    - ![image](https://github.com/hiro903/Kadai10/assets/145466271/c7c8d1a4-3965-476e-a30d-bcaff6d06bfd)
+　　　　””とリクエストを投げると「何もない」にカウントされてしまう。
+    - ![image](https://github.com/hiro903/Kadai10/assets/145466271/055ffca9-0f29-4d82-91e4-7c671d15d956)
+   　　![image](https://github.com/hiro903/Kadai10/assets/145466271/288bf49b-df1c-4c40-927d-66d406b05e84)
+   　　データ型が文字列型の場合、nullとリクエストを投げないとデータベースが空になってしまう。
+    - ![image](https://github.com/hiro903/Kadai10/assets/145466271/bfcb2a98-1167-471c-a2c7-fd20121faf8c)
+6.**name != null と Object.nonNull(name) の違い**
+    - name != null:
+      nameがnullでない場合に条件を満たしnameがnullであるかどうかを直接確認する。
+    - Object.nonNull(name):
+      ObjectクラスのnonNullメソッドを使用。このメソッドはJava 8から導入された。
+      nonNullメソッドは、渡されたオブジェクトがnullでない場合にtrueを返し、それ以外の場合にfalseを返す。
+      nonNullメソッドは、オブジェクトがnullでないことを明示的に示すため、可読性が向上する。Object.nonNull(name)はnonNullメソッドを使用しているため、オブジェクトがnullでないことを明示的に示す。

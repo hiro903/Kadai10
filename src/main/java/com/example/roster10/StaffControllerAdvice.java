@@ -12,15 +12,16 @@ import java.util.Map;
 
 @ControllerAdvice
 public class StaffControllerAdvice {
+
     @ExceptionHandler(value = StaffNotFoundException.class)
-    public ResponseEntity handleStaffNotFoundException(
+    public ResponseEntity<Object> handleStaffNotFoundException(
             StaffNotFoundException e, HttpServletRequest request) {
-        Map<String, String> body = new HashMap<>();
+        Map<String, Object> body = new HashMap<>();
         body.put("timestamp", ZonedDateTime.now().toString());
-        body.put("status", String.valueOf(HttpStatus.NOT_FOUND.value()));
+        body.put("status", HttpStatus.NOT_FOUND.value());
         body.put("error", HttpStatus.NOT_FOUND.getReasonPhrase());
         body.put("message", e.getMessage());
         body.put("path", request.getRequestURI());
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
     }
 }
