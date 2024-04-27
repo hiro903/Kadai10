@@ -28,9 +28,16 @@ public class StaffController {
         StaffResponse body = new StaffResponse("staff created");
         return ResponseEntity.created(location).body(body);
     }
+
     @GetMapping("/staff/{id}")
-    public ResponseEntity<Staff> getRoster(@PathVariable("id") int id) {
+    public ResponseEntity<Staff> getStaff(@PathVariable("id") int id) {
         return ResponseEntity.ok(staffService.findStaff(id));
+    }
+
+    @PutMapping("/staff/{id}")
+    public ResponseEntity<Object> updateStaff(@PathVariable Integer id, @RequestBody StaffRequest staffRequest) {
+        staffService.updateStaff(id, staffRequest.getName(), staffRequest.getDateOfBirth(), staffRequest.getNearestStation());
+        return ResponseEntity.ok(new StaffResponse("Staff updated"));
     }
 
 }

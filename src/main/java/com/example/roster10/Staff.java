@@ -4,10 +4,10 @@ import java.time.LocalDate;
 
 public class Staff {
 
-    final Integer id;
-    final String name;
-    final LocalDate dateOfBirth;
-    final String nearestStation;
+    private Integer id;
+    private String name;
+    private LocalDate dateOfBirth;
+    private String nearestStation;
 
     public Staff(Integer id, String name, LocalDate dateOfBirth, String nearestStation) {
         this.id = id;
@@ -28,11 +28,23 @@ public class Staff {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
     public String getNearestStation() {
         return nearestStation;
+    }
+
+    public void setNearestStation(String nearestStation) {
+        this.nearestStation = nearestStation;
     }
 }

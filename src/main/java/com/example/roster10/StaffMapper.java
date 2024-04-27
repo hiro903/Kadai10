@@ -1,10 +1,8 @@
 package com.example.roster10;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Mapper
@@ -23,7 +21,11 @@ public interface StaffMapper {
             keyProperty = "id"
     )
     void insert(Staff staff);
+
     @Select("SELECT * FROM staff WHERE id =#{id}")
     Optional<Staff> findById(int id);
+
+    @Update("UPDATE staff SET name = #{name}, date_of_birth = #{dateOfBirth}, nearest_station = #{nearestStation} WHERE id = #{id}")
+    void updateStaff(Staff staff);
 
 }
