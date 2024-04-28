@@ -28,4 +28,6 @@ public interface StaffMapper {
     @Update("UPDATE staff SET name = #{name}, date_of_birth = #{dateOfBirth}, nearest_station = #{nearestStation} WHERE id = #{id}")
     void updateStaff(Staff staff);
 
+    @Delete("DELETE FROM staff WHERE id = #{id}")
+    void deleteById(Staff staff);
 }

@@ -1,5 +1,6 @@
 package com.example.roster10;
 
+import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -32,7 +33,6 @@ public class StaffService {
         // スタッフが見つからない場合は例外をスローする
         Staff existingStaff = staffOptional.orElseThrow(() -> new StaffNotFoundException("Staff with id " + id + " not found"));
 
-
         // リクエストで送られてきた値が null でない場合にのみ更新する
         if (Objects.nonNull(name)) {
             existingStaff.setName(name);
@@ -47,4 +47,10 @@ public class StaffService {
         staffMapper.updateStaff(existingStaff);
     }
 
+    public void deleteStaffById(int id) {
+        Optional<Staff> staffOptional = staffMapper.findById(id);
+        Staff deleteStaff = staffOptional.orElseThrow(() -> new StaffNotFoundException("Staff with id " + id + " not found"));
+        staffMapper.deleteById(deleteStaff);
+
+    }
 }

@@ -1,5 +1,5 @@
 
-## 10回目課題-1: CREATE処理-READ処理-UPDATE処理
+## 10回目課題-1: CREATE処理-READ処理-UPDATE処理-DELETE処理
 
 ### 目次
 1. プロジェクト名
@@ -46,6 +46,10 @@
    <br> ![image](https://github.com/hiro903/Kadai10/assets/145466271/b496c111-3f39-4972-b03b-593db26cf244)
 　　<br>![image](https://github.com/hiro903/Kadai10/assets/145466271/9f9b2c2d-24fb-4ecc-98d6-3910c7a0f4ae)
    <br> ![image](https://github.com/hiro903/Kadai10/assets/145466271/98495fff-5422-4505-83d9-a6c9fba665dd)
+　　<br>![image](https://github.com/hiro903/Kadai10/assets/145466271/a53e74c6-f689-41f5-98ef-1ba2156521e7)
+　　<br>![image](https://github.com/hiro903/Kadai10/assets/145466271/6e34ecd0-3b02-4161-96ba-84b0614b3489)
+　　<br>![image](https://github.com/hiro903/Kadai10/assets/145466271/0c154276-83c1-4df2-8e9d-611c57c61185)
+　　<br>![image](https://github.com/hiro903/Kadai10/assets/145466271/0546b34b-7d9e-4773-a843-2485126fac53)
 ### 6. エラー
 1. リクエストを投げたら、500サーバーエラーが返ってきてしまう。コードエラーは直していたので、問題の箇所を見つけるのに時間がかかった。
    >カラムでもたせていた「date_of_birth」がRosterクラスではgetDateOfBirth()メソッドが提供されていたが、MapperクラスのINSERT文ではスネークケースで記載されていたので、リクエストを投げた時にマッピングできなかった。エンティティのフィールド名、リクエストを投げる時は、キャメルケースにすること。（※「nearest_station」はなぜかエラーにならなかった）
@@ -116,10 +120,10 @@ MyBatisの動的SQLを記述するための終了タグ。
    　　![image](https://github.com/hiro903/Kadai10/assets/145466271/288bf49b-df1c-4c40-927d-66d406b05e84)
    　　データ型が文字列型の場合、nullとリクエストを投げないとデータベースが空になってしまう。
     - ![image](https://github.com/hiro903/Kadai10/assets/145466271/bfcb2a98-1167-471c-a2c7-fd20121faf8c)
-6.**name != null と Object.nonNull(name) の違い**
+6.**name != null と Objects.nonNull(name) の違い**
     - name != null:
       nameがnullでない場合に条件を満たしnameがnullであるかどうかを直接確認する。
-    - Object.nonNull(name):
+    - Objects.nonNull(name):
       ObjectクラスのnonNullメソッドを使用。このメソッドはJava 8から導入された。
       nonNullメソッドは、渡されたオブジェクトがnullでない場合にtrueを返し、それ以外の場合にfalseを返す。
       nonNullメソッドは、オブジェクトがnullでないことを明示的に示すため、可読性が向上する。Object.nonNull(name)はnonNullメソッドを使用しているため、オブジェクトがnullでないことを明示的に示す。
