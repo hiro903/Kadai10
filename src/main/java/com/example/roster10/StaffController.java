@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 
+import java.net.IDN;
 import java.net.URI;
 import java.time.ZonedDateTime;
 import java.util.HashMap;
@@ -40,4 +41,9 @@ public class StaffController {
         return ResponseEntity.ok(new StaffResponse("Staff updated"));
     }
 
+    @DeleteMapping("/staff/{id}")
+    public ResponseEntity<Object> deleteStaffById(@PathVariable("id") int id) {
+        staffService.deleteStaffById(id);
+        return ResponseEntity.ok(new StaffResponse("Staff delete"));
+    }
 }
