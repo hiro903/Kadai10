@@ -44,6 +44,6 @@ public class StaffController {
     @DeleteMapping("/staff/{id}")
     public ResponseEntity<Object> deleteStaffById(@PathVariable("id") int id) {
         staffService.deleteStaffById(id);
-        return ResponseEntity.ok(new StaffResponse("Staff delete"));
+        return ResponseEntity.ok(new StaffResponse("Staff deleted"));
     }
 }
