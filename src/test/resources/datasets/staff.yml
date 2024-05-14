@@ -1,0 +1,13 @@
+- table: staff
+    - id: 1
+      name: "chika"
+      LocalDate.of: "2000-07-01"
+      nearest_station: "Tokyo"
+    - id: 2
+      name: "airi"
+      LocalDate.of: "2005-08-13"
+      nearest_station: "Meguro"
+    - id: 3
+      name: "nanami"
+      LocalDate.of: "1998-10-25"
+      nearest_station: "Kichijoji"

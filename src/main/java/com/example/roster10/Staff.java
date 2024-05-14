@@ -1,6 +1,7 @@
 package com.example.roster10;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Staff {
 
@@ -46,5 +47,18 @@ public class Staff {
 
     public void setNearestStation(String nearestStation) {
         this.nearestStation = nearestStation;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Staff staff = (Staff) o;
+        return Objects.equals(id, staff.id) && Objects.equals(name, staff.name) && Objects.equals(dateOfBirth, staff.dateOfBirth) && Objects.equals(nearestStation, staff.nearestStation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, dateOfBirth, nearestStation);
     }
 }
