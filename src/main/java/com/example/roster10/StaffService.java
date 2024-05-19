@@ -4,6 +4,7 @@ import org.apache.ibatis.exceptions.PersistenceException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -52,5 +53,8 @@ public class StaffService {
         Staff deleteStaff = staffOptional.orElseThrow(() -> new StaffNotFoundException("Staff with id " + id + " not found"));
         staffMapper.deleteById(deleteStaff);
 
+    }
+    public List<Staff>findAll(){
+        return this.staffMapper.findAll();
     }
 }

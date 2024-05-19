@@ -11,6 +11,7 @@ import java.net.IDN;
 import java.net.URI;
 import java.time.ZonedDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -45,5 +46,9 @@ public class StaffController {
     public ResponseEntity<Object> deleteStaffById(@PathVariable("id") int id) {
         staffService.deleteStaffById(id);
         return ResponseEntity.ok(new StaffResponse("Staff deleted"));
+    }
+    @GetMapping("/staff/")
+    public List<Staff>getStaff(){
+        return staffService.findAll();
     }
 }
