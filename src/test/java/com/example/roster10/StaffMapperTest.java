@@ -35,10 +35,7 @@ class StaffMapperTest {
 
     @Test
     @DataSet(value = "datasets/staff.yml")
-//    @Sql(
-//            scripts = {"classpath:/sqlannotation/delete-staff.sql", "classpath:/sqlannotation/insert-staff.sql"},
-//            executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD
-//    )
+
     @Transactional
     void ユーザーが取得できること() throws Exception {
         String response = mockMvc.perform(MockMvcRequestBuilders.get("/staff/"))
@@ -66,16 +63,3 @@ class StaffMapperTest {
                 "]", response, JSONCompareMode.STRICT);
     }
 }
-
-
-
-//    void すべてのユーザーが取得できること() {
-//        List<Staff> staff = staffMapper.findAll();
-//        assertThat(staff)
-//                .hasSize(3)
-//                .contains(
-//                        new Staff(1, "chika", LocalDate.of(2000, 7, 1), "Tokyo"),
-//                        new Staff(2, "airi", LocalDate.of(2005, 8, 13), "Meguro"),
-//                        new Staff(3, "nanami", LocalDate.of(1998, 10, 25), "Kichijoji")
-//                );
-//    }

@@ -54,7 +54,8 @@ public class StaffService {
         staffMapper.deleteById(deleteStaff);
 
     }
-    public List<Staff>findAll(){
+
+    public List<Staff> findAll() {
         return this.staffMapper.findAll();
     }
 }
