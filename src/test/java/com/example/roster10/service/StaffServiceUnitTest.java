@@ -28,14 +28,14 @@ public class StaffServiceUnitTest {
     }
 
     @Test
-    public void testInsert() {
+    public void 登録処理テスト() {
         Staff staff = Staff.createStaff("Anna", LocalDate.of(2001, 1, 1), "Tokyo");
         staffService.insert(staff.getName(), staff.getDateOfBirth(), staff.getNearestStation());
 
         verify(staffMapper, times(1)).insert(any(Staff.class));
     }
     @Test
-    public void testFindStaff() {
+    public void スタッフ検索テスト() {
         when(staffMapper.findById(1)).thenReturn(Optional.of(new Staff(1, "Anna", LocalDate.of(2001, 1, 1), "Tokyo")));
 
         Staff staff = staffService.findStaff(1);

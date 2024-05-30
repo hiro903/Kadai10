@@ -16,6 +16,7 @@ import java.util.Map;
 
 
 @RestController
+
 public class StaffController {
     private final StaffService staffService;
 
@@ -47,8 +48,9 @@ public class StaffController {
         staffService.deleteStaffById(id);
         return ResponseEntity.ok(new StaffResponse("Staff deleted"));
     }
-    @GetMapping("/staff/")
-    public List<Staff>getStaff(){
+
+    @GetMapping("/staff")
+    public List<Staff> getStaff() {
         return staffService.findAll();
     }
 }
