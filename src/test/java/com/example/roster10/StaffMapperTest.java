@@ -35,31 +35,35 @@ class StaffMapperTest {
 
     @Test
     @DataSet(value = "datasets/staff.yml")
-
     @Transactional
     void ユーザーが取得できること() throws Exception {
-        String response = mockMvc.perform(MockMvcRequestBuilders.get("/staff/"))
+        String response = mockMvc.perform(MockMvcRequestBuilders.get("/staff"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn().getResponse().getContentAsString(StandardCharsets.UTF_8);
-        JSONAssert.assertEquals("[" +
-                " {" +
-                " \"id\": 1," +
-                " \"name\": \"chika\"," +
-                " \"dateOfBirth\": \"2000-07-01\"," +
-                " \"nearestStation\": \"Tokyo\"" +
-                " }," +
-                " {" +
-                " \"id\": 2," +
-                " \"name\": \"airi\"," +
-                " \"dateOfBirth\": \"2005-08-13\"," +
-                " \"nearestStation\": \"Meguro\"" +
-                " }," +
-                " {" +
-                " \"id\": 3," +
-                " \"name\": \"nanami\"," +
-                " \"dateOfBirth\": \"1998-10-25\"," +
-                " \"nearestStation\": \"Kichijoji\"" +
-                " }" +
-                "]", response, JSONCompareMode.STRICT);
+
+        String expectedResponse = """
+        [
+            {
+                "id": 1,
+                "name": "chika",
+                "dateOfBirth": "2000-07-01",
+                "nearestStation": "Tokyo"
+            },
+            {
+                "id": 2,
+                "name": "airi",
+                "dateOfBirth": "2005-08-13",
+                "nearestStation": "Meguro"
+            },
+            {
+                "id": 3,
+                "name": "nanami",
+                "dateOfBirth": "1998-10-25",
+                "nearestStation": "Kichijoji"
+            }
+        ]
+        """;
+
+        JSONAssert.assertEquals(expectedResponse, response, JSONCompareMode.STRICT);
     }
 }
