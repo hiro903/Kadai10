@@ -32,7 +32,7 @@ class StaffServiceIntegrationTest {
     @Test
     @DataSet("datasets/staff.yml")
     @Transactional
-    void testInsertAndFind() {
+    void 挿入と検索のテスト() {
         Staff staff = staffService.insert("chika", LocalDate.of(2000, 7, 1), "Tokyo");
         Staff foundStaff = staffService.findStaff(staff.getId());
 
@@ -43,7 +43,7 @@ class StaffServiceIntegrationTest {
     @Test
     @DataSet("datasets/staff.yml")
     @Transactional
-    void testUpdateStaff() {
+    void スタッフ更新テスト() {
         Staff staff = staffService.insert("chika", LocalDate.of(2000, 7, 1), "Tokyo");
         staffService.updateStaff(staff.getId(), "Anna", null, null);
 
@@ -54,7 +54,7 @@ class StaffServiceIntegrationTest {
     @Test
     @DataSet("datasets/staff.yml")
     @Transactional
-    void testFindAll() {
+    void 全スタッフ検索テスト() {
         staffService.insert("chika", LocalDate.of(2000, 7, 1), "Tokyo");
         staffService.insert("Ann", LocalDate.of(2000, 2, 2), "Shinagawa");
 
