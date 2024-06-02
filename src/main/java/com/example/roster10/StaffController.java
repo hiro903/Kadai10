@@ -1,19 +1,11 @@
 package com.example.roster10;
 
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-
-import java.net.IDN;
 import java.net.URI;
-import java.time.ZonedDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 
 @RestController
 
@@ -25,11 +17,11 @@ public class StaffController {
     }
 
     @PostMapping("/staff")
-    public ResponseEntity<Object> insert(@RequestBody StaffRequest staffRequest, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<Staff> insert(@RequestBody StaffRequest staffRequest, UriComponentsBuilder uriBuilder) {
         Staff staff = staffService.insert(staffRequest.getName(), staffRequest.getDateOfBirth(), staffRequest.getNearestStation());
         URI location = uriBuilder.path("/staff/{id}").buildAndExpand(staff.getId()).toUri();
-        StaffResponse body = new StaffResponse("staff created");
-        return ResponseEntity.created(location).body(body);
+//        StaffResponse body = new StaffResponse("staff created");
+        return ResponseEntity.created(location).body(staff);
     }
 
     @GetMapping("/staff/{id}")
