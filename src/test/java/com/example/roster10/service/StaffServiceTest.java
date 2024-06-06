@@ -96,12 +96,3 @@ public class StaffServiceTest {
         verify(staffMapper, times(0)).deleteById(any(Staff.class));
     }
 }
-
-
-//    @Test
-//    public void スタッフ検索テスト() {
-//        when(staffMapper.findById(1)).thenReturn(Optional.of(new Staff(1, "Anna", LocalDate.of(2001, 1, 1), "Tokyo")));
-//        Staff staff = staffService.findStaff(1);
-//        assertNotNull(staff);
-//        assertEquals("Anna", staff.getName());
-//    }
