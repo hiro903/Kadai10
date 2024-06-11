@@ -8,7 +8,6 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-
 public class StaffController {
     private final StaffService staffService;
 
