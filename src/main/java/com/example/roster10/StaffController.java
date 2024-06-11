@@ -20,7 +20,6 @@ public class StaffController {
     public ResponseEntity<Staff> insert(@RequestBody StaffRequest staffRequest, UriComponentsBuilder uriBuilder) {
         Staff staff = staffService.insert(staffRequest.getName(), staffRequest.getDateOfBirth(), staffRequest.getNearestStation());
         URI location = uriBuilder.path("/staff/{id}").buildAndExpand(staff.getId()).toUri();
-//        StaffResponse body = new StaffResponse("staff created");
         return ResponseEntity.created(location).body(staff);
     }
 
