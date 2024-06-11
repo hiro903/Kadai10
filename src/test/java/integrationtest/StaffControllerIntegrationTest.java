@@ -1,4 +1,4 @@
-package com.example.roster10.service;
+package integrationtest;
 
 import com.example.roster10.Staff;
 import com.example.roster10.StaffRequest;

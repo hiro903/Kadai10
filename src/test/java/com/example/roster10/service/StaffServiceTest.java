@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-//@ExtendWith(MockitoExtension.class)
+
 public class StaffServiceTest {
 
     @InjectMocks
@@ -57,7 +57,7 @@ public class StaffServiceTest {
         assertThat(insertedStaff.getNearestStation()).isEqualTo("Tokyo");
     }
 
-    // findStaff 異常系のテスト
+
     @Test
     public void 存在しないユーザーのIDを指定したときに例外処理されること() {
         doReturn(Optional.empty()).when(staffMapper).findById(999);
@@ -70,7 +70,6 @@ public class StaffServiceTest {
     }
 
 
-    // updateStaff 異常系のテスト
     @Test
     public void 更新しようとするスタッフが存在しない場合に例外処理されること() {
         doReturn(Optional.empty()).when(staffMapper).findById(999);
@@ -83,7 +82,7 @@ public class StaffServiceTest {
         verify(staffMapper, times(0)).updateStaff(any(Staff.class));
     }
 
-    // deleteStaff 異常系のテスト
+
     @Test
     public void 削除しようとするスタッフが存在しない場合に例外処理されること() {
         doReturn(Optional.empty()).when(staffMapper).findById(999);
