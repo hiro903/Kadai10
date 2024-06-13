@@ -2,7 +2,7 @@ package com.example.roster10;
 
 import org.apache.ibatis.annotations.*;
 
-import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Mapper
@@ -24,6 +24,9 @@ public interface StaffMapper {
 
     @Select("SELECT * FROM staff WHERE id =#{id}")
     Optional<Staff> findById(int id);
+
+    @Select("SELECT * FROM staff")
+    List<Staff> findAll();
 
     @Update("UPDATE staff SET name = #{name}, date_of_birth = #{dateOfBirth}, nearest_station = #{nearestStation} WHERE id = #{id}")
     void updateStaff(Staff staff);
