@@ -10,8 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @DBRider
@@ -43,4 +44,44 @@ class StaffMapperTest {
             assertEquals(expectedList.get(i).getNearestStation(), staffList.get(i).getNearestStation());
         }
     }
+
+    @Test
+    @DataSet(cleanBefore = false)
+    @Transactional
+    void ユーザーが挿入できること() {
+        Staff newStaff = new Staff(null, "Anna", LocalDate.of(2010, 1, 2), "Fukuoka");
+        staffMapper.insert(newStaff);
+
+        assertNotNull(newStaff.getId());
+
+        Optional<Staff> insertedStaff = staffMapper.findById(newStaff.getId());
+        assertTrue(insertedStaff.isPresent());
+        assertEquals("Anna", insertedStaff.get().getName());
+        assertEquals(LocalDate.of(2010, 1, 2), insertedStaff.get().getDateOfBirth());
+        assertEquals("Fukuoka", insertedStaff.get().getNearestStation());
+    }
+
+    @Test
+    @DataSet(value = "datasets/staff.yml", cleanBefore = true)
+    @Transactional
+    void ユーザーが更新できること() {
+        Staff updatedStaff = new Staff(1, "chika_updated", LocalDate.of(2000, 7, 1), "Tokyo_updated");
+        staffMapper.updateStaff(updatedStaff);
+
+        Optional<Staff> staff = staffMapper.findById(1);
+        assertTrue(staff.isPresent());
+        assertEquals("chika_updated", staff.get().getName());
+        assertEquals("Tokyo_updated", staff.get().getNearestStation());
+    }
+
+    @Test
+    @DataSet(value = {"datasets/staff.yml"}, cleanBefore = true)
+    @Transactional
+    void ユーザーが削除できること() {
+        staffMapper.deleteById(new Staff(1, null, null, null));
+
+        Optional<Staff> deletedStaff = staffMapper.findById(1);
+        assertFalse(deletedStaff.isPresent());
+    }
+
 }
