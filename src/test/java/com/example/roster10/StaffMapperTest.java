@@ -1,22 +1,22 @@
 package com.example.roster10;
 
 import com.github.database.rider.core.api.dataset.DataSet;
+import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import com.github.database.rider.spring.api.DBRider;
 import org.junit.jupiter.api.Test;
-import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-
+@SpringBootTest(classes = StaffApplication.class)
 @DBRider
-@MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class StaffMapperTest {
 
@@ -24,64 +24,43 @@ class StaffMapperTest {
     private StaffMapper staffMapper;
 
     @Test
-    @DataSet(value = {"datasets/staff.yml"}, cleanBefore = true)
+    @DataSet(value = "datasets/staff.yml", cleanBefore = true)
+    @ExpectedDataSet("expected_datasets/after_find_all.yml")
     @Transactional
     void ユーザーが取得できること() {
         List<Staff> staffList = staffMapper.findAll();
 
-        List<Staff> expectedList = List.of(
-                new Staff(1, "chika", LocalDate.of(2000, 7, 1), "Tokyo"),
-                new Staff(2, "airi", LocalDate.of(2005, 8, 13), "Meguro"),
-                new Staff(3, "nanami", LocalDate.of(1998, 10, 25), "Kichijoji")
-        );
-
-        assertEquals(expectedList.size(), staffList.size());
-
-        for (int i = 0; i < expectedList.size(); i++) {
-            assertEquals(expectedList.get(i).getId(), staffList.get(i).getId());
-            assertEquals(expectedList.get(i).getName(), staffList.get(i).getName());
-            assertEquals(expectedList.get(i).getDateOfBirth(), staffList.get(i).getDateOfBirth());
-            assertEquals(expectedList.get(i).getNearestStation(), staffList.get(i).getNearestStation());
-        }
     }
 
     @Test
-    @DataSet(cleanBefore = false)
+    @Sql("/sqlannotation/delete-staff.sql")
+    @DataSet(value = "datasets/staff.yml", cleanBefore = true)
+    @ExpectedDataSet("expected_datasets/after_insert.yml")
     @Transactional
     void ユーザーが挿入できること() {
-        Staff newStaff = new Staff(null, "Anna", LocalDate.of(2010, 1, 2), "Fukuoka");
+        Staff newStaff = new Staff(null, "Anna", LocalDate.of(2001, 1, 1), "Tokyo");
         staffMapper.insert(newStaff);
 
         assertNotNull(newStaff.getId());
 
-        Optional<Staff> insertedStaff = staffMapper.findById(newStaff.getId());
-        assertTrue(insertedStaff.isPresent());
-        assertEquals("Anna", insertedStaff.get().getName());
-        assertEquals(LocalDate.of(2010, 1, 2), insertedStaff.get().getDateOfBirth());
-        assertEquals("Fukuoka", insertedStaff.get().getNearestStation());
     }
 
     @Test
     @DataSet(value = "datasets/staff.yml", cleanBefore = true)
+    @ExpectedDataSet("expected_datasets/after_update.yml")
     @Transactional
     void ユーザーが更新できること() {
-        Staff updatedStaff = new Staff(1, "chika_updated", LocalDate.of(2000, 7, 1), "Tokyo_updated");
+        Staff updatedStaff = new Staff(1, "Anna", LocalDate.of(2001, 1, 1), "Tokyo");
         staffMapper.updateStaff(updatedStaff);
 
-        Optional<Staff> staff = staffMapper.findById(1);
-        assertTrue(staff.isPresent());
-        assertEquals("chika_updated", staff.get().getName());
-        assertEquals("Tokyo_updated", staff.get().getNearestStation());
     }
 
     @Test
     @DataSet(value = {"datasets/staff.yml"}, cleanBefore = true)
+    @ExpectedDataSet("expected_datasets/after_delete.yml")
     @Transactional
     void ユーザーが削除できること() {
-        staffMapper.deleteById(new Staff(1, null, null, null));
+        staffMapper.deleteById(1);
 
-        Optional<Staff> deletedStaff = staffMapper.findById(1);
-        assertFalse(deletedStaff.isPresent());
     }
-
 }

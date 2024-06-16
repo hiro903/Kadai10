@@ -33,4 +33,6 @@ public interface StaffMapper {
 
     @Delete("DELETE FROM staff WHERE id = #{id}")
     void deleteById(Staff staff);
+
+    void deleteById(int i);
 }
