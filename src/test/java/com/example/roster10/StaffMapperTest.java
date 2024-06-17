@@ -10,8 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = StaffApplication.class)
@@ -29,7 +31,14 @@ class StaffMapperTest {
     void ユーザーが取得できること() {
         List<Staff> staffList = staffMapper.findAll();
 
+        List<Staff> expectedStaffList = Arrays.asList(
+                new Staff(1, "chika", LocalDate.of(2000, 7, 1), "Tokyo"),
+                new Staff(2, "airi", LocalDate.of(2005, 8, 13), "Meguro"),
+                new Staff(3, "nanami", LocalDate.of(1998, 10, 25), "Kichijoji")
+        );
+        assertEquals(expectedStaffList, staffList, "スタッフリストの内容が一致しません");
     }
+
 
     @Test
     @DataSet(value = "datasets/staff.yml", cleanBefore = true, executeScriptsBefore = "/sqlannotation/delete-staff.sql")

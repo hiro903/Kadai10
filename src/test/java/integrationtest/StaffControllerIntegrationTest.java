@@ -20,7 +20,6 @@ import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = StaffApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DBRider
 public class StaffControllerIntegrationTest {
 
