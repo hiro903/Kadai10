@@ -67,7 +67,9 @@ class StaffMapperTest {
     @ExpectedDataSet("expected_datasets/after_delete.yml")
     @Transactional
     void ユーザーが削除できること() {
-        staffMapper.deleteById(1);
+        Staff staffToDelete = new Staff(1, null, null, null);
+
+        staffMapper.deleteById(staffToDelete);
 
     }
 }
