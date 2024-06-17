@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -33,8 +32,7 @@ class StaffMapperTest {
     }
 
     @Test
-    @Sql("/sqlannotation/delete-staff.sql")
-    @DataSet(value = "datasets/staff.yml", cleanBefore = true)
+    @DataSet(value = "datasets/staff.yml", cleanBefore = true, executeScriptsBefore = "/sqlannotation/delete-staff.sql")
     @ExpectedDataSet("expected_datasets/after_insert.yml")
     @Transactional
     void ユーザーが挿入できること() {
