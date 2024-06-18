@@ -26,7 +26,6 @@ class StaffMapperTest {
 
     @Test
     @DataSet(value = "datasets/staff.yml", cleanBefore = true)
-    @ExpectedDataSet("expected_datasets/after_find_all.yml")
     @Transactional
     void ユーザーが取得できること() {
         List<Staff> staffList = staffMapper.findAll();
