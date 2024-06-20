@@ -1,6 +1,7 @@
 package integrationtest;
 
 import com.example.roster10.Staff;
+import com.example.roster10.StaffApplication;
 import com.example.roster10.StaffRequest;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
@@ -18,7 +19,7 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = StaffApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DBRider
 public class StaffControllerIntegrationTest {
 
